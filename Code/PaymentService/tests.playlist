@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="PaymentService.Tests.UnitTest1.GetResetDatabase_ShouldReturnZeroTransactions" /><Add Test="PaymentService.Tests.UnitTest1.Post_ShouldReturnTrue" /><Add Test="PaymentService.Tests.UnitTest1.Get_ShouldReturnAllTransactions" /></Playlist>

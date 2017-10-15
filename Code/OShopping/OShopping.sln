@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OShopping", "OShopping\OShopping.csproj", "{1F9FDDFF-0147-41F6-952E-701DADC2449F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OShopping.Tests", "OShopping.Tests\OShopping.Tests.csproj", "{74DAE109-978C-4EBF-84DD-74F1A04EF60D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F9FDDFF-0147-41F6-952E-701DADC2449F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F9FDDFF-0147-41F6-952E-701DADC2449F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F9FDDFF-0147-41F6-952E-701DADC2449F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F9FDDFF-0147-41F6-952E-701DADC2449F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74DAE109-978C-4EBF-84DD-74F1A04EF60D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74DAE109-978C-4EBF-84DD-74F1A04EF60D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74DAE109-978C-4EBF-84DD-74F1A04EF60D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74DAE109-978C-4EBF-84DD-74F1A04EF60D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,25 @@
+Jquery Card validator
+https://github.com/stripe/jquery.payment (using this)
+
+https://github.com/jessepollak/card
+https://github.com/jessepollak/payment
+
+Mundipagg API .Net
+https://github.com/mundipagg/mundipagg-one-dotnet
+http://docs.mundipagg.com/docs/bem-vindo
+PM> Install-Package MundiPagg.Gateway.Client
+
+Mongodb
+https://docs.mongodb.org/manual/
+PM> Install-Package mongocsharpdriver
+cmd:
+cd C:\Program Files\MongoDB\Server\3.2\bin
+mongod.exe --dbpath "D:\Github\mundipaggChallenge\Data\MongoDb"
+
+
+Test credit card numbers
+https://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
+http://www.getcreditcardnumbers.com/
+
+
+Nuget install Asp.net web api Cors

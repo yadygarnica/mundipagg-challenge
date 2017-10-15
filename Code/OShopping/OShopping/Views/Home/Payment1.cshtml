@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Payment";
+}
+
+<style>
+    .card-container {
+        width: 100%;
+        max-width: 350px;
+        margin: 50px auto;
+    }
+
+    input {
+        margin: 10px auto;
+    }
+    .has-error input {
+      border-width: 2px;
+    }
+    .validation.text-danger:after {
+      content: 'There are some errors with the information provided.';
+    }
+    .validation.text-error:after {
+       content:'There were some problems and the transaction was not do it.'
+    }
+    .validation.text-success:after {
+      content: 'Congratulation your payment is being processed.';
+    }  
+</style>
+
+
+
+<h2>Payment</h2>
+
+<div class="jumbotron">
+    <h1>@ViewBag.ProductName</h1>
+    <p>Price: R @ViewBag.ProductPrice</p>
+</div>
+@*<div style="text-align:center" class="demo-container">
+        <div class="alert alert-success" style="display: none"><strong>Parabéns!</strong> <span id="alert-success-message"></span></div>
+        <div class="alert alert-danger" style="display: none"><strong id="message-error">Oops!</strong> <span id="alert-error-message"></span></div>
+        <div class="card-wrapper" ></div>
+        <div class="form-container active">
+            <form>
+                <input class="form-control" placeholder="Credit card number" required="required" type="text" name="number" id="number">
+                <input class="form-control" placeholder="Name in the card" required="required" type="text" name="name" id="name">
+                <input class="form-control" placeholder="Expiration Date" required="required" type="text" name="expiry" id="expiry">
+                <input class="form-control" placeholder="Secure Code" required="required" type="text" name="cvc" id="cvc">
+                <input class="btn btn-primary btn-block" value="Buy with credit card" type="submit">
+            </form>
+        </div>
+    </div>*@
+
+<div class="card-container">
+    <form novalidate autocomplete="on">
+        <div class="form-group">
+            <input id="cc-name" type="text" class="input-lg form-control cc-name" autocomplete="cc-name" placeholder="Name in the card" required>
+        </div>
+
+        <div class="form-group">
+           <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="Card number" required>
+        </div>
+
+        <div class="form-group">
+            <input id="cc-exp" type="tel" class="input-lg form-control cc-exp" autocomplete="cc-exp" placeholder="Expiration Date" required>
+        </div>
+
+        <div class="form-group">
+            <input id="cc-cvc" type="tel" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="•••" required>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Pay with credit card</button>
+            </div>
+        </div>
+       
+        <h2 class="validation"></h2>
+    </form>
+</div>
+
+@*<script src="~/Scripts/jquery.card.js"></script>*@
+<script src="~/Scripts/jquery.payment.js"></script>
+<script>
+    $(function () {
+    
+        $('.cc-number').payment('formatCardNumber');
+        $('.cc-exp').payment('formatCardExpiry');
+        $('.cc-cvc').payment('formatCardCVC');
+
+        $.fn.toggleInputError = function(erred) {
+            this.parent('.form-group').toggleClass('has-error', erred);
+            return this;
+        };
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var cardType = $.payment.cardType($('.cc-number').val());
+            var numb_error=$('.has-error').length;
+
+            $('.cc-number').toggleInputError(!$.payment.validateCardNumber($('.cc-number').val()));
+            numb_error=$('.has-error').length;
+
+            $('.cc-exp').toggleInputError(!$.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal')));
+            numb_error=$('.has-error').length;
+
+            $('.cc-cvc').toggleInputError(!$.payment.validateCardCVC($('.cc-cvc').val(), cardType));     
+            numb_error=$('.has-error').length;
+
+            $('.validation').removeClass('text-danger text-success text-error');           
+
+            
+            //there is no error
+            if(numb_error==0)
+            {
+                var exp = $.payment.cardExpiryVal($('.cc-exp').val());
+            
+                var transaction =
+                {
+                    value: @ViewBag.ProductPrice,
+                    cardName: $('.cc-name').val(),
+                    cardCVV: $('.cc-cvc').val(),
+                    cardNumber: $('.cc-number').val(),
+                    cardType: "visa",
+                    cardExpMonth: exp.month,
+                    cardExpYear: exp.year,
+                };
+                var uri = 'http://localhost:49885/api/transactions/';
+
+                $.ajax({
+                    url: uri,
+                    method: "POST",
+                    data: transaction,
+                    success: onSuccess,
+                    dataType: "json"
+                });
+            }  
+            else
+                $('.validation').addClass('text-danger');
+        });
+      
+
+        function onSuccess(response)
+        {
+            if(response)
+            {
+                $('.validation').addClass('text-success');
+                $('.form-group').css('display','none')
+            }
+            else
+                $('.validation').addClass('text-error');          
+        }
+
+    });
+</script>
